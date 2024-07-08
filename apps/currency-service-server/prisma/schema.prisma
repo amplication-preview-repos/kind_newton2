@@ -1,0 +1,35 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model ApiProvider {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  apiKey    String?
+  name      String?
+  endpoint  String?
+}
+
+model ExchangeRate {
+  id             String    @id @default(cuid())
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  rate           Float?
+  lastUpdated    DateTime?
+  targetCurrency String?
+  sourceCurrency String?
+}
+
+model Currency {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  code      String?
+  name      String?
+}
